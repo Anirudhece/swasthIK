@@ -1,6 +1,5 @@
-"use client";
-
 import { Center, Heading } from "@chakra-ui/react";
+
 import {
   Button,
   FormControl,
