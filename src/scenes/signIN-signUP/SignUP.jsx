@@ -33,7 +33,7 @@ export default function SignUP() {
             Sign up
           </Heading>
           <Text fontSize={"lg"} color={"gray.600"}>
-            to enjoy all of our cool features ✌️
+            to access Himachal Pradesh Hospitals
           </Text>
         </Stack>
         <Box
