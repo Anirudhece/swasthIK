@@ -235,43 +235,29 @@ const Form2 = () => {
 };
 
 const Form3 = () => {
+  const [symptoms, setSymptoms] = useState([]); // State to hold the array of symptoms
+  const [newSymptom, setNewSymptom] = useState(""); // State to hold the new symptom input
+
+  // Function to handle Enter key press
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter" && newSymptom.trim() !== "") {
+      // Check if Enter key is pressed and input is not empty
+      setSymptoms([...symptoms, newSymptom.trim()]); // Add new symptom to the array
+      setNewSymptom(""); // Clear the input field
+    }
+  };
+
+  // Function to handle input value change
+  const handleInputChange = (e) => {
+    setNewSymptom(e.target.value);
+  };
+
   return (
     <>
       <Heading w="100%" textAlign={"center"} fontWeight="normal">
         Symptoms
       </Heading>
       <SimpleGrid columns={1} spacing={6}>
-        {/* <FormControl as={GridItem} colSpan={[3, 2]}>
-          <FormLabel
-            fontSize="sm"
-            fontWeight="md"
-            color="gray.700"
-            _dark={{
-              color: "gray.50",
-            }}
-          >
-            Website
-          </FormLabel>
-          <InputGroup size="sm">
-            <InputLeftAddon
-              bg="gray.50"
-              _dark={{
-                bg: "gray.800",
-              }}
-              color="gray.500"
-              rounded="md"
-            >
-              http://
-            </InputLeftAddon>
-            <Input
-              type="tel"
-              placeholder="www.example.com"
-              focusBorderColor="brand.400"
-              rounded="md"
-            />
-          </InputGroup>
-        </FormControl> */}
-
         <FormControl id="email" mt={1}>
           <FormLabel
             fontSize="sm"
@@ -281,33 +267,44 @@ const Form3 = () => {
               color: "gray.50",
             }}
           >
-            What symptoms you are feeling
+            What symptoms are you feeling
           </FormLabel>
           <Textarea
-            placeholder="press 'enter' to add"
+            placeholder="Press 'Enter' to add"
             rows={3}
             shadow="sm"
             focusBorderColor="brand.400"
             fontSize={{
               sm: "sm",
             }}
+            value={newSymptom}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyPress}
           />
           <FormHelperText>add 'general' if unaware</FormHelperText>
         </FormControl>
-        <HStack spacing={4}>
-          {["sm", "md", "lg"].map((size) => (
+        <Box spacing={4}>
+          {symptoms.map((symptom, index) => (
             <Tag
-              size={size}
-              key={size}
+              m={"1"}
+              size="md" // You can adjust the size as needed
+              key={index}
               borderRadius="full"
               variant="solid"
               colorScheme="blue"
             >
-              <TagLabel>Green</TagLabel>
-              <TagCloseButton />
+              <TagLabel>{symptom}</TagLabel>
+              <TagCloseButton
+                onClick={() => {
+                  // Remove the selected symptom from the array
+                  const updatedSymptoms = [...symptoms];
+                  updatedSymptoms.splice(index, 1);
+                  setSymptoms(updatedSymptoms);
+                }}
+              />
             </Tag>
           ))}
-        </HStack>
+        </Box>
       </SimpleGrid>
     </>
   );
