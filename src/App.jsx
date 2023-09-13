@@ -4,14 +4,18 @@ import SignUP from "./scenes/signIN-signUP/SignUP";
 import ResetPassword from "./scenes/signIN-signUP/ResetPassword";
 import VerifyOTP from "./scenes/signIN-signUP/VerifyOTP";
 import Navbar from "./scenes/global/Navbar";
+import Footer from "./scenes/global/Footer";
+import Maps from "./components/Maps";
 function App() {
   return (
     <>
-      <Navbar/>
+      <Navbar />
       {/* <SignIN />
       <SignUP />
       <ResetPassword />
       <VerifyOTP/> */}
+      <Maps />
+      <Footer />
     </>
   );
 }
