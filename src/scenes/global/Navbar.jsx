@@ -32,15 +32,17 @@ import {
   FiChevronDown,
   FiPhoneCall,
 } from "react-icons/fi";
+import { Link, useLocation } from "react-router-dom";
 const LinkItems = [
   { name: "Home", icon: FiHome },
-  { name: "News & Updates", icon: FiTrendingUp },
+  { name: "News&Updates", icon: FiTrendingUp },
   { name: "Hospitals", icon: FiCompass },
   { name: "Records", icon: FiStar },
-  { name: "Settings", icon: FiSettings },
+  { name: "LogIN", icon: FiSettings },
 ];
 
 const SidebarContent = ({ onClose, ...rest }) => {
+  // const handleRoute = (e) => {};
   return (
     <Box
       transition="3s ease"
@@ -59,9 +61,11 @@ const SidebarContent = ({ onClose, ...rest }) => {
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
-          {link.name}
-        </NavItem>
+        <Link style={{ textDecoration: "none" }} to={`/${link.name}`}>
+          <NavItem key={link.name} icon={link.icon}>
+            {link.name}
+          </NavItem>
+        </Link>
       ))}
     </Box>
   );
@@ -166,10 +170,10 @@ const MobileNav = ({ onOpen, ...rest }) => {
                 <HStack>
                   <Avatar
                     name="kashsh khera"
-                    bg='teal.300'
+                    bg="teal.300"
                     src="https://bit.ly/broken-link"
                   />
-                 
+
                   <VStack
                     display={{ base: "none", md: "flex" }}
                     alignItems="flex-start"

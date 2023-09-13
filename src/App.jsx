@@ -8,6 +8,8 @@ import Footer from "./scenes/global/Footer";
 import Maps from "./components/Maps";
 import Home from "./scenes/home/Home";
 
+import { Route, Routes, Navigate } from "react-router-dom";
+
 function App() {
   const [marginLeft, setMarginLeft] = useState("240px");
 
@@ -32,12 +34,19 @@ function App() {
     <>
       <Navbar />
       <div style={{ marginLeft }}>
-        <Home />
-        {/* <SignIN />
-        <SignUP />
-        <ResetPassword />
-        <VerifyOTP /> */}
-        {/* <Maps /> */}
+        <Routes>
+          <Route path="/" element={<Navigate to="/Home" />} />
+          <Route path="/Home" element={<Home />} />
+          <Route path="/LogIN" element={<SignIN />} />
+          <Route path="/SignUP" element={<SignUP />} />
+          <Route path="/ResetPassword" element={<ResetPassword />} />
+          <Route path="/VerifyOTP" element={<VerifyOTP />} />
+          <Route path="/SignUP" element={<SignUP />} />
+          {/* <Route path="/News&Updates" element={<NewsUpdates />} /> */}
+          {/* <Route path="/Records" element={<Records />} /> */}
+          {/* <Route path="/Maps" element={<Maps />} /> */}
+          {/* <Route path="/Setting" element={<Setting />} /> */}
+        </Routes>
         <Footer />
       </div>
     </>
