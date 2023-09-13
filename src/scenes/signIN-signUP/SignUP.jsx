@@ -16,9 +16,17 @@ import {
   useColorModeValue,
   Link,
 } from "@chakra-ui/react";
+import axios from 'axios';
+
 
 export default function SignUP() {
   const [showPassword, setShowPassword] = useState(false);
+  const [userData, setUserData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: ""
+  });
 
   return (
     <Flex
@@ -47,24 +55,32 @@ export default function SignUP() {
               <Box>
                 <FormControl id="firstName" isRequired>
                   <FormLabel>First Name</FormLabel>
-                  <Input type="text" />
+                  <Input type="text" name="firstName" onChange={(e) => {
+                    setUserData({ ...userData, [e.target.name]: e.target.value })
+                  }} />
                 </FormControl>
               </Box>
               <Box>
                 <FormControl id="lastName">
                   <FormLabel>Last Name</FormLabel>
-                  <Input type="text" />
+                  <Input type="text" name="lastName" onChange={(e) => {
+                    setUserData({ ...userData, [e.target.name]: e.target.value })
+                  }} />
                 </FormControl>
               </Box>
             </HStack>
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <Input type="email" name="email" onChange={(e) => {
+                setUserData({ ...userData, [e.target.name]: e.target.value })
+              }} />
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? "text" : "password"} />
+                <Input type={showPassword ? "text" : "password"} name="password" onChange={(e) => {
+                  setUserData({ ...userData, [e.target.name]: e.target.value })
+                }} />
                 <InputRightElement h={"full"}>
                   <Button
                     variant={"ghost"}
@@ -85,6 +101,19 @@ export default function SignUP() {
                 color={"white"}
                 _hover={{
                   bg: "blue.500",
+                }}
+
+                onClick={async (e) => {
+                  // e.preventDefault();
+                  try {
+                    console.log("reactfile msg send");
+                    const { data } = await axios.post("http://localhost:5000/user/signup", {
+                      ...userData,
+                    });
+                    console.log(data);
+                  } catch (error) {
+                    console.log(error.message);
+                  }
                 }}
               >
                 Sign up
