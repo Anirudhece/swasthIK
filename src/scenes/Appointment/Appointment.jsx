@@ -22,6 +22,10 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
   NumberInput,
+  Tag,
+  TagLabel,
+  TagCloseButton,
+  HStack,
 } from "@chakra-ui/react";
 
 import { useToast } from "@chakra-ui/react";
@@ -32,7 +36,7 @@ const Form1 = () => {
   return (
     <>
       <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
-        User Registration
+        Patient Details
       </Heading>
       <Flex>
         <FormControl isRequired mr="5%">
@@ -116,62 +120,8 @@ const Form2 = () => {
   return (
     <>
       <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
-        User Details
+        Patient Address
       </Heading>
-      <FormControl as={GridItem} colSpan={[6, 3]}>
-        <FormLabel
-          htmlFor="country"
-          fontSize="sm"
-          fontWeight="md"
-          color="gray.700"
-          _dark={{
-            color: "gray.50",
-          }}
-        >
-          Country / Region
-        </FormLabel>
-        <Select
-          id="country"
-          name="country"
-          autoComplete="country"
-          placeholder="Select option"
-          focusBorderColor="brand.400"
-          shadow="sm"
-          size="sm"
-          w="full"
-          rounded="md"
-        >
-          <option>United States</option>
-          <option>Canada</option>
-          <option>Mexico</option>
-        </Select>
-      </FormControl>
-
-      <FormControl as={GridItem} colSpan={6}>
-        <FormLabel
-          htmlFor="street_address"
-          fontSize="sm"
-          fontWeight="md"
-          color="gray.700"
-          _dark={{
-            color: "gray.50",
-          }}
-          mt="2%"
-        >
-          Street address
-        </FormLabel>
-        <Input
-          type="text"
-          name="street_address"
-          id="street_address"
-          autoComplete="street-address"
-          focusBorderColor="brand.400"
-          shadow="sm"
-          size="sm"
-          w="full"
-          rounded="md"
-        />
-      </FormControl>
 
       <FormControl as={GridItem} colSpan={[6, 6, null, 2]}>
         <FormLabel
@@ -199,32 +149,6 @@ const Form2 = () => {
         />
       </FormControl>
 
-      {/* <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
-        <FormLabel
-          htmlFor="state"
-          fontSize="sm"
-          fontWeight="md"
-          color="gray.700"
-          _dark={{
-            color: "gray.50",
-          }}
-          mt="2%"
-        >
-          State / Province
-        </FormLabel>
-        <Input
-          type="text"
-          name="state"
-          id="state"
-          autoComplete="state"
-          focusBorderColor="brand.400"
-          shadow="sm"
-          size="sm"
-          w="full"
-          rounded="md"
-        />
-      </FormControl> */}
-
       <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
         <FormLabel
           htmlFor="postal_code"
@@ -250,6 +174,62 @@ const Form2 = () => {
           rounded="md"
         />
       </FormControl>
+
+      <FormControl mt={"2%"} as={GridItem} colSpan={[6, 3]}>
+        <FormLabel
+          htmlFor="country"
+          fontSize="sm"
+          fontWeight="md"
+          color="gray.700"
+          _dark={{
+            color: "gray.50",
+          }}
+        >
+          select district
+        </FormLabel>
+        <Select
+          id="country"
+          name="country"
+          autoComplete="country"
+          placeholder="Select option"
+          focusBorderColor="brand.400"
+          shadow="sm"
+          size="sm"
+          w="full"
+          rounded="md"
+        >
+          <option>Shimla</option>
+          <option>Kangra</option>
+          <option>Chamba</option>
+          <option>Dharamshala</option>
+        </Select>
+      </FormControl>
+
+      <FormControl mt={"2%"} as={GridItem} colSpan={6}>
+        <FormLabel
+          htmlFor="street_address"
+          fontSize="sm"
+          fontWeight="md"
+          color="gray.700"
+          _dark={{
+            color: "gray.50",
+          }}
+          mt="2%"
+        >
+          Street address
+        </FormLabel>
+        <Input
+          type="text"
+          name="street_address"
+          id="street_address"
+          autoComplete="street-address"
+          focusBorderColor="brand.400"
+          shadow="sm"
+          size="sm"
+          w="full"
+          rounded="md"
+        />
+      </FormControl>
     </>
   );
 };
@@ -258,10 +238,10 @@ const Form3 = () => {
   return (
     <>
       <Heading w="100%" textAlign={"center"} fontWeight="normal">
-        Social Handles
+        Symptoms
       </Heading>
       <SimpleGrid columns={1} spacing={6}>
-        <FormControl as={GridItem} colSpan={[3, 2]}>
+        {/* <FormControl as={GridItem} colSpan={[3, 2]}>
           <FormLabel
             fontSize="sm"
             fontWeight="md"
@@ -290,7 +270,7 @@ const Form3 = () => {
               rounded="md"
             />
           </InputGroup>
-        </FormControl>
+        </FormControl> */}
 
         <FormControl id="email" mt={1}>
           <FormLabel
@@ -301,10 +281,10 @@ const Form3 = () => {
               color: "gray.50",
             }}
           >
-            About
+            What symptoms you are feeling
           </FormLabel>
           <Textarea
-            placeholder="you@example.com"
+            placeholder="press 'enter' to add"
             rows={3}
             shadow="sm"
             focusBorderColor="brand.400"
@@ -312,10 +292,22 @@ const Form3 = () => {
               sm: "sm",
             }}
           />
-          <FormHelperText>
-            Brief description for your profile. URLs are hyperlinked.
-          </FormHelperText>
+          <FormHelperText>add 'general' if unaware</FormHelperText>
         </FormControl>
+        <HStack spacing={4}>
+          {["sm", "md", "lg"].map((size) => (
+            <Tag
+              size={size}
+              key={size}
+              borderRadius="full"
+              variant="solid"
+              colorScheme="blue"
+            >
+              <TagLabel>Green</TagLabel>
+              <TagCloseButton />
+            </Tag>
+          ))}
+        </HStack>
       </SimpleGrid>
     </>
   );
