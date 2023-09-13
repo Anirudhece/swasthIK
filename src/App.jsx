@@ -9,6 +9,7 @@ import Maps from "./components/Maps";
 import Home from "./scenes/home/Home";
 
 import { Route, Routes, Navigate } from "react-router-dom";
+import Appointment from "./scenes/Appointment/Appointment";
 
 function App() {
   const [marginLeft, setMarginLeft] = useState("240px");
@@ -37,6 +38,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/Home" />} />
           <Route path="/Home" element={<Home />} />
+          <Route path="/Appointment" element={<Appointment />} />
           <Route path="/LogIN" element={<SignIN />} />
           <Route path="/SignUP" element={<SignUP />} />
           <Route path="/ResetPassword" element={<ResetPassword />} />

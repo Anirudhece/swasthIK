@@ -21,6 +21,7 @@ import {
   Badge,
   AvatarBadge,
 } from "@chakra-ui/react";
+// import { link } from "fs";
 import {
   FiHome,
   FiTrendingUp,
@@ -33,8 +34,11 @@ import {
   FiPhoneCall,
 } from "react-icons/fi";
 import { Link, useLocation } from "react-router-dom";
+import {BsHospital} from "react-icons/bs";
+
 const LinkItems = [
   { name: "Home", icon: FiHome },
+  {name:'Appointment',icon:BsHospital},
   { name: "News&Updates", icon: FiTrendingUp },
   { name: "Hospitals", icon: FiCompass },
   { name: "Records", icon: FiStar },
@@ -72,6 +76,14 @@ const SidebarContent = ({ onClose, ...rest }) => {
 };
 
 const NavItem = ({ icon, children, ...rest }) => {
+  const location = useLocation();
+
+  // Define the active route name based on the pathname
+  const activeRouteName = location.pathname.replace("/", "");
+
+  // Define the border color for the active route
+  const activeBorderColor =
+    activeRouteName === children ? "blue" : "transparent";
   return (
     <Box
       as="a"
@@ -85,6 +97,7 @@ const NavItem = ({ icon, children, ...rest }) => {
         borderRadius="lg"
         role="group"
         cursor="pointer"
+        sx={{ border: `2px solid ${activeBorderColor}` }} // Apply the active border color
         _hover={{
           bg: "cyan.400",
           color: "white",
@@ -212,7 +225,7 @@ const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
+    <Box bg={useColorModeValue("gray.100", "gray.900")}>
       <SidebarContent
         onClose={() => onClose}
         display={{ base: "none", md: "block" }}
@@ -230,7 +243,6 @@ const Navbar = () => {
         </DrawerContent>
       </Drawer>
       <MobileNav onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p="4"></Box>
     </Box>
   );
 };
