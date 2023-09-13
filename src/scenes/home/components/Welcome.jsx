@@ -9,7 +9,7 @@ import {
   Box,
   Center,
 } from "@chakra-ui/react";
-
+import { Link } from "react-router-dom";
 export default function Welcome() {
   return (
     <Stack minH={"60vh"} direction={{ base: "column", md: "row" }}>
@@ -17,23 +17,23 @@ export default function Welcome() {
         <Stack spacing={6} w={"full"} maxW={"lg"}>
           <Heading fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}>
             {/* <Box textAlign={"Center"}> */}
-              <Text
-                as={"span"}
-                position={"relative"}
-                //   textAlign={'Center'}
-                _after={{
-                  content: "''",
-                  width: "full",
-                  height: useBreakpointValue({ base: "20%", md: "30%" }),
-                  position: "absolute",
-                  bottom: 1,
-                  left: 0,
-                  bg: "blue.400",
-                  zIndex: -1,
-                }}
-              >
-                Welcome
-              </Text>
+            <Text
+              as={"span"}
+              position={"relative"}
+              //   textAlign={'Center'}
+              _after={{
+                content: "''",
+                width: "full",
+                height: useBreakpointValue({ base: "20%", md: "30%" }),
+                position: "absolute",
+                bottom: 1,
+                left: 0,
+                bg: "blue.400",
+                zIndex: -1,
+              }}
+            >
+              Welcome
+            </Text>
             {/* </Box> */}
             <br />
             <Text textAlign={"Center"} color={"cyan.400"} as={"span"}>
@@ -45,16 +45,18 @@ export default function Welcome() {
             Himachal Pradesh
           </Text>
           <Stack direction={{ base: "column", md: "row" }} spacing={4}>
-            <Button
-              rounded={"full"}
-              bg={"blue.400"}
-              color={"white"}
-              _hover={{
-                bg: "blue.500",
-              }}
-            >
-              Book Appointment
-            </Button>
+            <Link style={{ textDecoration: "none" }} to={`/Appointment`}>
+              <Button
+                rounded={"full"}
+                bg={"blue.400"}
+                color={"white"}
+                _hover={{
+                  bg: "blue.500",
+                }}
+              >
+                Book Appointment
+              </Button>
+            </Link>
             <Button rounded={"full"}>Check Status</Button>
           </Stack>
         </Stack>

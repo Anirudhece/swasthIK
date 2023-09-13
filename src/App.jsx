@@ -7,6 +7,7 @@ import Navbar from "./scenes/global/Navbar";
 import Footer from "./scenes/global/Footer";
 import Maps from "./components/Maps";
 import Home from "./scenes/home/Home";
+import Error from "./scenes/ErrorPage/Error";
 
 import { Route, Routes, Navigate } from "react-router-dom";
 import Appointment from "./scenes/Appointment/Appointment";
@@ -44,6 +45,7 @@ function App() {
           <Route path="/ResetPassword" element={<ResetPassword />} />
           <Route path="/VerifyOTP" element={<VerifyOTP />} />
           <Route path="/SignUP" element={<SignUP />} />
+          <Route path="/Error" element={<Error />} />
           {/* <Route path="/News&Updates" element={<NewsUpdates />} /> */}
           {/* <Route path="/Records" element={<Records />} /> */}
           {/* <Route path="/Maps" element={<Maps />} /> */}

@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Text, Heading, Container } from "@chakra-ui/react";
+
 function Topheading() {
   const gradientColor = (firstColor, secondColor) => {
     const gradientText = {
