@@ -110,7 +110,8 @@ export default function SignUP() {
                     const { data } = await axios.post("http://localhost:5000/user/signup", {
                       ...userData,
                     });
-                    console.log(data);
+                    console.log(data.email);
+
                   } catch (error) {
                     console.log(error.message);
                   }
