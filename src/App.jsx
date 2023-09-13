@@ -5,12 +5,12 @@ import ResetPassword from "./scenes/signIN-signUP/ResetPassword";
 import VerifyOTP from "./scenes/signIN-signUP/VerifyOTP";
 import Navbar from "./scenes/global/Navbar";
 import Footer from "./scenes/global/Footer";
-import Maps from "./components/Maps";
 import Home from "./scenes/home/Home";
 import Error from "./scenes/ErrorPage/Error";
 
 import { Route, Routes, Navigate } from "react-router-dom";
 import Appointment from "./scenes/Appointment/Appointment";
+import ChartsMaps from "./scenes/Charts-Maps/ChartsMaps";
 
 function App() {
   const [marginLeft, setMarginLeft] = useState("240px");
@@ -46,9 +46,9 @@ function App() {
           <Route path="/VerifyOTP" element={<VerifyOTP />} />
           <Route path="/SignUP" element={<SignUP />} />
           <Route path="/Error" element={<Error />} />
+          <Route path="/ChartsMaps" element={<ChartsMaps />} />
           {/* <Route path="/News&Updates" element={<NewsUpdates />} /> */}
           {/* <Route path="/Records" element={<Records />} /> */}
-          {/* <Route path="/Maps" element={<Maps />} /> */}
           {/* <Route path="/Setting" element={<Setting />} /> */}
         </Routes>
         <Footer />

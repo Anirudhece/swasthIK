@@ -34,15 +34,17 @@ import {
   FiPhoneCall,
 } from "react-icons/fi";
 import { Link, useLocation } from "react-router-dom";
-import {BsHospital} from "react-icons/bs";
+import { BsHospital } from "react-icons/bs";
+import { HiOutlineLocationMarker } from "react-icons/hi";
 
 const LinkItems = [
   { name: "Home", icon: FiHome },
-  {name:'Appointment',icon:BsHospital},
+  { name: "Appointment", icon: BsHospital },
   { name: "News&Updates", icon: FiTrendingUp },
   { name: "Hospitals", icon: FiCompass },
   { name: "Records", icon: FiStar },
   { name: "LogIN", icon: FiSettings },
+  { name: "ChartsMaps", icon: HiOutlineLocationMarker },
 ];
 
 const SidebarContent = ({ onClose, ...rest }) => {
