@@ -19,8 +19,9 @@ import {
   MenuList,
   Tooltip,
   Badge,
-  AvatarBadge,
+  AvatarBadge,Button, ButtonGroup,
 } from "@chakra-ui/react";
+// import {  } from '@chakra-ui/react'
 import {
   FiHome,
   FiTrendingUp,
@@ -196,7 +197,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
                   >
                     <Text fontSize="sm">Kashish Khera </Text>
                     <Text fontSize="xs" color="gray.600">
-                      Organ extractor
+                      Patient
                     </Text>
                   </VStack>
                   <Box display={{ base: "none", md: "flex" }}>
