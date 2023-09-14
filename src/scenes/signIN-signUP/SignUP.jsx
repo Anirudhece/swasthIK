@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
@@ -15,7 +15,6 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  // Link,
   useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
@@ -29,6 +28,17 @@ export default function SignUP() {
     password: "",
     confirmPassword: "",
   });
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    // Check if all required fields are filled
+    setIsFormValid(
+      userData.firstName &&
+        userData.email &&
+        userData.password &&
+        userData.confirmPassword && userData.password===userData.confirmPassword
+    );
+  }, [userData]);
 
   function throwToast(title, status, message) {
     const toast = useToast();
@@ -136,7 +146,7 @@ export default function SignUP() {
               <InputGroup>
                 <Input
                   type={showPassword ? "text" : "password"}
-                  name="setPassword"
+                  name="confirmPassword"
                   onChange={(e) => {
                     setUserData({
                       ...userData,
@@ -166,25 +176,30 @@ export default function SignUP() {
                   bg: "blue.500",
                 }}
                 onClick={async (e) => {
-                  // e.preventDefault();
-                  try {
-                    console.log("reactfile msg send");
-                    const { data } = await axios.post(
-                      "http://localhost:5000/user/signup",
-                      {
-                        ...userData,
-                      }
+                  // Check if the form is valid
+                  if (isFormValid) {
+                    try {
+                      console.log("reactfile msg send");
+                      const { data } = await axios.post(
+                        "http://localhost:5000/user/signup",
+                        {
+                          ...userData,
+                        }
+                      );
+                      console.log(data.email);
+                    } catch (error) {
+                      console.log(error.message); //
+                    }
+                  } else {
+                    throwToast(
+                      "Form Incomplete",
+                      "error",
+                      "Please fill in all required fields."
                     );
-                    console.log(data.email);
-                  } catch (error) {
-                    console.log(error.message); //
                   }
-                  // {
-                  //   200: 'success',
-                  //   201: 'account created',
-                  //   404: 'error',
-                  // }
                 }}
+                // Disable the button when the form is not valid
+                isDisabled={!isFormValid}
               >
                 Sign up
               </Button>
