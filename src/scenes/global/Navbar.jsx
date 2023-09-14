@@ -21,7 +21,6 @@ import {
   Badge,
   AvatarBadge,
 } from "@chakra-ui/react";
-// import { link } from "fs";
 import {
   FiHome,
   FiTrendingUp,

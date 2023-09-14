@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
   Flex,
@@ -14,10 +15,10 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  Link,
+  // Link,
+  useToast,
 } from "@chakra-ui/react";
-import axios from 'axios';
-
+import axios from "axios";
 
 export default function SignUP() {
   const [showPassword, setShowPassword] = useState(false);
@@ -25,8 +26,20 @@ export default function SignUP() {
     firstName: "",
     lastName: "",
     email: "",
-    password: ""
+    password: "",
+    confirmPassword: "",
   });
+
+  function throwToast(title, status, message) {
+    const toast = useToast();
+    return toast({
+      title: title,
+      description: message,
+      status: status,
+      duration: 9000,
+      isClosable: true,
+    });
+  }
 
   return (
     <Flex
@@ -55,32 +68,82 @@ export default function SignUP() {
               <Box>
                 <FormControl id="firstName" isRequired>
                   <FormLabel>First Name</FormLabel>
-                  <Input type="text" name="firstName" onChange={(e) => {
-                    setUserData({ ...userData, [e.target.name]: e.target.value })
-                  }} />
+                  <Input
+                    type="text"
+                    name="firstName"
+                    onChange={(e) => {
+                      setUserData({
+                        ...userData,
+                        [e.target.name]: e.target.value,
+                      });
+                    }}
+                  />
                 </FormControl>
               </Box>
               <Box>
                 <FormControl id="lastName">
                   <FormLabel>Last Name</FormLabel>
-                  <Input type="text" name="lastName" onChange={(e) => {
-                    setUserData({ ...userData, [e.target.name]: e.target.value })
-                  }} />
+                  <Input
+                    type="text"
+                    name="lastName"
+                    onChange={(e) => {
+                      setUserData({
+                        ...userData,
+                        [e.target.name]: e.target.value,
+                      });
+                    }}
+                  />
                 </FormControl>
               </Box>
             </HStack>
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
-              <Input type="email" name="email" onChange={(e) => {
-                setUserData({ ...userData, [e.target.name]: e.target.value })
-              }} />
+              <Input
+                type="email"
+                name="email"
+                onChange={(e) => {
+                  setUserData({ ...userData, [e.target.name]: e.target.value });
+                }}
+              />
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? "text" : "password"} name="password" onChange={(e) => {
-                  setUserData({ ...userData, [e.target.name]: e.target.value })
-                }} />
+                <Input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  onChange={(e) => {
+                    setUserData({
+                      ...userData,
+                      [e.target.name]: e.target.value,
+                    });
+                  }}
+                />
+                <InputRightElement h={"full"}>
+                  <Button
+                    variant={"ghost"}
+                    onClick={() =>
+                      setShowPassword((showPassword) => !showPassword)
+                    }
+                  >
+                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+            </FormControl>
+            <FormControl id="confirmPassword" isRequired>
+              <FormLabel>Confirm your Password</FormLabel>
+              <InputGroup>
+                <Input
+                  type={showPassword ? "text" : "password"}
+                  name="setPassword"
+                  onChange={(e) => {
+                    setUserData({
+                      ...userData,
+                      [e.target.name]: e.target.value,
+                    });
+                  }}
+                />
                 <InputRightElement h={"full"}>
                   <Button
                     variant={"ghost"}
@@ -102,19 +165,25 @@ export default function SignUP() {
                 _hover={{
                   bg: "blue.500",
                 }}
-
                 onClick={async (e) => {
                   // e.preventDefault();
                   try {
                     console.log("reactfile msg send");
-                    const { data } = await axios.post("http://localhost:5000/user/signup", {
-                      ...userData,
-                    });
+                    const { data } = await axios.post(
+                      "http://localhost:5000/user/signup",
+                      {
+                        ...userData,
+                      }
+                    );
                     console.log(data.email);
-
                   } catch (error) {
-                    console.log(error.message);
+                    console.log(error.message); //
                   }
+                  // {
+                  //   200: 'success',
+                  //   201: 'account created',
+                  //   404: 'error',
+                  // }
                 }}
               >
                 Sign up
@@ -122,7 +191,11 @@ export default function SignUP() {
             </Stack>
             <Stack pt={6}>
               <Text align={"center"}>
-                Already a user? <Link color={"blue.400"}>Login</Link>
+                Already a user?{" "}
+                <Link to={`/LogIN`}>
+                  {" "}
+                  <Text color={"blue.400"}>Login</Text>
+                </Link>
               </Text>
             </Stack>
           </Stack>
